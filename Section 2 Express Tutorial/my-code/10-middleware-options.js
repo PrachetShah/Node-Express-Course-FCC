@@ -1,35 +1,28 @@
-// Express Apps are nothing but bunch of Middleware stuffs stuffed together
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
-
-// req => middleware => res
 const logger = require("./logger");
 const authorize = require("./authorize");
+//  req => middleware => res
 
-//using logger in every function If i keep it after app.get('/') i will not see in / route
-// app.use([authorize, logger]);
-// app.use(morgan("tiny"));
-// app.use('/api', logger); This will applly to all routes with /api as a base
+// app.use([logger, authorize])
+// app.use(express.static('./public'))
+app.use(morgan("tiny"));
 
-// referencing the function
 app.get("/", (req, res) => {
   res.send("Home");
 });
-
 app.get("/about", (req, res) => {
   res.send("About");
 });
-
 app.get("/api/products", (req, res) => {
   res.send("Products");
 });
-
 app.get("/api/items", (req, res) => {
-  // console.log(req.user);
+  console.log(req.user);
   res.send("Items");
 });
 
 app.listen(5000, () => {
-  console.log("Server listening on Port 5000");
+  console.log("Server is listening on port 5000....");
 });
