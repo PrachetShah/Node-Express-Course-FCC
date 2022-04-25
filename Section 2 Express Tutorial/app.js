@@ -1,34 +1,22 @@
-// Express Apps are nothing but bunch of Middleware stuffs stuffed together
 const express = require("express");
 const app = express();
-const morgan = require("morgan");
 
-// req => middleware => res
-const logger = require("./logger");
-const authorize = require("./authorize");
+// import router
+const people = require("./routes/people");
+const auth = require("./routes/auth");
 
-//using logger in every function If i keep it after app.get('/') i will not see in / route
-// app.use([authorize, logger]);
-// app.use(morgan("tiny"));
-// app.use('/api', logger); This will applly to all routes with /api as a base
+// Static Assets
+app.use(express.static("./methods-public"));
 
-// referencing the function
-app.get("/", (req, res) => {
-  res.send("Home");
-});
+// parse form data
+app.use(express.urlencoded({ extended: false }));
 
-app.get("/about", (req, res) => {
-  res.send("About");
-});
+// parse json
+app.use(express.json());
 
-app.get("/api/products", (req, res) => {
-  res.send("Products");
-});
-
-app.get("/api/items", (req, res) => {
-  // console.log(req.user);
-  res.send("Items");
-});
+// set up base url
+app.use("/api/people", people);
+app.use("/login", auth);
 
 app.listen(5000, () => {
   console.log("Server listening on Port 5000");
