@@ -18,4 +18,5 @@ const server = http.createServer((req, res) => {
   //   res.end();
 });
 
+console.log("Server Listening on port 5000");
 server.listen(5000);

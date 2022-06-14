@@ -9,6 +9,6 @@ console.log(data);
 
 require("./07-mindGrenade");
 
-// sayHi("Prachet");
-// sayHi(names.john);
-// sayHi(names.peter);
+sayHi("Prachet");
+sayHi(names.john);
+sayHi(names.peter);
